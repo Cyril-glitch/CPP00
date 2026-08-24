@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClassPhoneBook.hpp                                 :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:52:47 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/22 22:02:51 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/24 21:38:06 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ClassPhoneBook_HPP
-# define ClassPhoneBook_HPP 
-# include "ClassContact.hpp"
+#ifndef PhoneBook_HPP
+# define PhoneBook_HPP 
+# include "Contact.hpp"
 
-class ClassPhoneBook
+class PhoneBook
 {
     public :
 
-    ClassPhoneBook(void);
-    ~ClassPhoneBook(void);
+    PhoneBook(void);
+    ~PhoneBook(void);
 
-    ClassContact contacts[8];
-    void add(ClassContact contacts[8]);
+    Contact contacts[8];
+    void displaycmds(void);
+    void add(Contact contacts[8]);
+    void search(Contact contacts[8]);
+    void exit(void);
 };
 
 #endif

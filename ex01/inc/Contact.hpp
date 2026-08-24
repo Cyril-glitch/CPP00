@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClassContact.cpp                                   :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 20:46:01 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/22 22:03:20 by cycolonn         ###   ########.fr       */
+/*   Created: 2026/08/22 20:39:28 by cycolonn          #+#    #+#             */
+/*   Updated: 2026/08/24 21:37:46 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "../inc/ClassContact.hpp"
 
-ClassContact::ClassContact(void)
-{
-    std::cout << "constructor called." << std::endl;
-    return ;
-}
+#ifndef Contact_HPP
+# define Contact_HPP
+# include <iostream>
 
-ClassContact::~ClassContact(void)
+class Contact
 {
-    std::cout << "destructor called." << std::endl;
-    return ;
-}
+    public:
+
+        Contact(void);
+        ~Contact(void);
+
+        std::string name;
+        std::string number;
+};
+
+#endif

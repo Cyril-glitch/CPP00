@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClassContact.hpp                                   :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 20:39:28 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/22 21:58:16 by cycolonn         ###   ########.fr       */
+/*   Created: 2026/08/22 20:46:01 by cycolonn          #+#    #+#             */
+/*   Updated: 2026/08/24 22:13:19 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include "../inc/Contact.hpp"
 
-#ifndef ClassContact_HPP
-# define ClassContact_HPP
-# include <iostream>
-
-class ClassContact
+Contact::Contact(void)
 {
-    public:
+    return ;
+}
 
-        ClassContact(void);
-        ~ClassContact(void);
-
-        std::string name;
-        std::string number;
-};
-
-#endif
+Contact::~Contact(void)
+{
+    return ;
+}
