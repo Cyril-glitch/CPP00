@@ -12,15 +12,23 @@ void PhoneBook::displaycmds(void)
     std::cout << "▖  ▖    ▄▖                ▄▖▌         ▄     ▌ \n"
               << "▛▖▞▌▌▌  ▌▌▌▌▌█▌▛▘▛▌▛▛▌█▌  ▙▌▛▌▛▌▛▌█▌  ▙▘▛▌▛▌▙▘\n"
               << "▌▝ ▌▙▌  ▛▌▚▚▘▙▖▄▌▙▌▌▌▌▙▖  ▌ ▌▌▙▌▌▌▙▖  ▙▘▙▌▙▌▛▖\n"
-              << "    ▄▌                                        \n" 
-              << std::endl;
+              << "    ▄▌                                        \n\n"; 
     std::cout << RESET;
 
-    std::cout << MINT "PLEASE ENTRE ONES OF FOLLOWING COMMANDS :\n\n" RESET;
-    std::cout << SALMON "ADD" RESET << std::endl;
-    std::cout << SALMON "SEARCH" RESET << std::endl;
-    std::cout << SALMON "EXIT" RESET << std::endl;
+    std::cout << MINT "PLEASE ENTER ONES OF FOLLOWING COMMANDS :\n\n" RESET;
+    std::cout << SALMON "ADD" RESET << "\n";
+    std::cout << SALMON "SEARCH" RESET << "\n";
+    std::cout << SALMON "EXIT\n" RESET << "\n";
 }
+
+
+void PhoneBook::getcmds(std::string& refcmds)
+{
+    std::cin >> refcmds; 
+    std::cout << "\n"; 
+    std::cout << MINT "You choose: " SALMON << refcmds << RESET << "\n";
+}
+
 
 void PhoneBook::add(Contact contacts[8])
 {
