@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:52:47 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/24 22:54:36 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/25 01:52:03 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ class PhoneBook
 
     Contact contacts[8];
     std::string cmds;
+
+    void displaylogo(void);
     void displaycmds(void);
-    void getcmds(std::string& refcmds);
+    int checkcmd(std::string& refcmd);
+    int getcmd(std::string& refcmd);
+    int execmd(std::string cmd);
     void add(Contact contacts[8]);
     void search(Contact contacts[8]);
     void exit(void);

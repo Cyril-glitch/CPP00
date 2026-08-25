@@ -8,7 +8,9 @@ BIN_DIR = bin
 
 SRC = src/main.cpp \
 	  src/PhoneBook.cpp \
-	  src/Contact.cpp
+	  src/Contact.cpp \
+	  src/safe_getline.cpp
+
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.cpp=.o)))
 
