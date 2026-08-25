@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:52:47 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/25 23:54:02 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/26 01:44:00 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@ class PhoneBook
     private :
 
     std::string cmd;
-
-    Contact contacts[8];
-    void displaycmds(void);
-    int checkline();
+    std::string info;
     
+    int nb_contacts;
+    Contact contact[8];
+
+    void displaycmds(void);
+
+    int checkcmd();    
+    int getinfo();
+    int checkinfo();    
+
     void add();
     void search();
     int exit(void);

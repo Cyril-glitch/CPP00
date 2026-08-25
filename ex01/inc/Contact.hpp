@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:39:28 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/24 23:47:00 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/26 00:45:10 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,23 @@ class Contact
         Contact(void);
         ~Contact(void);
 
-        std::string name;
-        std::string number;
+        std::string firstname;
+        std::string lastname;
+        std::string nickname;
+        std::string phonenumber;
+        std::string darkestsecret;
+
+        void setfirstname(std::string input);
+        void setlastname(std::string input);
+        void setnickname(std::string input);
+        void setnumber(std::string input);
+        void setsecret(std::string input);
+
+        std::string getfirstname(void) const;
+        std::string getlastname(void) const;
+        std::string getnickname(void) const;
+        std::string getnumber(void) const;
+        std::string getsecret(void) const;
 };
 
 #endif
