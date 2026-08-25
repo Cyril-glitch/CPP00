@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:59:09 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/25 01:57:51 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/25 23:50:04 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int main (int ac , char **av)
     PhoneBook book;
 
     book.displaylogo();
-    book.displaycmds();
-    if (!book.getcmd(book.cmds))
-        return -1;
-    book.execmd(book.cmds);
+    while (true)
+    {
+        if (!book.getcmd())
+            return -1;
+        if (!book.execmd())
+            return 0;
+    }
 }

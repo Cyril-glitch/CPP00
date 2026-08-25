@@ -24,47 +24,55 @@ void PhoneBook::displaycmds(void)
     std::cout << SALMON "EXIT\n" RESET << "\n";
 }
 
-int PhoneBook::checkcmd(std::string& refcmd)
+int PhoneBook::checkline(void)
 {
-    return (refcmd == "ADD" || refcmd == "SEARCH" || refcmd == "EXIT");
+    return (cmd == "ADD" || cmd == "SEARCH" || cmd == "EXIT");
 }
 
-int PhoneBook::getcmd(std::string& refcmd)
+int PhoneBook::getcmd(void)
 {        
-    if (!safe_getline(refcmd))
-        return 0;
-    if (!checkcmd(refcmd))
+    while(true)
     {
         displaycmds();
-        getcmd(refcmd);
+        if (!safe_getline(cmd))
+            return 0;
+        if (checkline())
+            return 1;
     }
-    std::cout << MINT "You choose: " SALMON << refcmd << RESET << "\n"; 
-    return 1;
 }
 
-int PhoneBook::execmd(std::string cmd)
-{
-    (void)cmd;
-    return 1;
-}
-
-void PhoneBook::add(Contact contacts[8])
+void PhoneBook::add(void)
 {
     (void)contacts;
+    std::cout << ICE_BLUE "***ADD A NEW CONTACT***" RESET << std::endl;
+    
 }
 
-void PhoneBook::search(Contact contacts[8])
+void PhoneBook::search(void)
 {
     (void)contacts;
+    std::cout << ICE_BLUE "***SEARCHING FOR A CONTACT***" RESET << std::endl;
+
 }
 
-void PhoneBook::exit(void)
+int PhoneBook::exit(void)
 {
-    (void)contacts;
+    std::cout << MINT "GOOD BYE !" RESET << std::endl;
+    return 0;
+}
+
+int PhoneBook::execmd(void)
+{   
+        if(cmd == "ADD")
+            add();
+        if(cmd == "SEARCH") 
+            search();
+        if (cmd == "EXIT")
+            return exit(); 
+        return 1;
 }
 
 PhoneBook::~PhoneBook(void)
 {
     return ;
 }
-
