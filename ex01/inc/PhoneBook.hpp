@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:52:47 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/26 01:44:00 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/27 01:20:07 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class PhoneBook
     void displaylogo(void);
     int getcmd();
     int execmd();
+    
 
     private :
 
@@ -35,11 +36,14 @@ class PhoneBook
 
     void displaycmds(void);
 
-    int checkcmd();    
-    int getinfo();
-    int checkinfo();    
 
-    void add();
+    int checkcmd();    
+    int getfield(std::string field);
+    int checkfield();    
+
+    void fillfield(std::string field);
+
+    int add();
     void search();
     int exit(void);
 };

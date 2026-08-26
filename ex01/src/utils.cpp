@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapb.hpp                                           :+:      :+:    :+:   */
+/*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/22 20:57:00 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/27 00:12:41 by cycolonn         ###   ########.fr       */
+/*   Created: 2026/08/26 23:51:28 by cycolonn          #+#    #+#             */
+/*   Updated: 2026/08/27 00:16:22 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAPB_HPP
-# define MAPB_HPP
+#include "../inc/mapb.hpp"
 
-# include <iostream>
-# include <limits>
-# include <cstdio>
-
-
-# include "colors.hpp"
-# include "PhoneBook.hpp"
-
-
-int safe_getline(std::string &refcmd);
-int strisspace(const std::string str);
-
-
-
-#endif
+int strisspace(const std::string str)
+{
+    size_t i;
+    for(i = 0 ; i < str.size() && !std::isspace(str.at(i)); i++);
+    return ( i == str.size());
+}

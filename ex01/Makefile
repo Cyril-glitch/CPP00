@@ -9,7 +9,8 @@ BIN_DIR = bin
 SRC = src/main.cpp \
 	  src/PhoneBook.cpp \
 	  src/Contact.cpp \
-	  src/safe_getline.cpp
+	  src/safe_getline.cpp \
+	  src/utils.cpp 
 
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.cpp=.o)))
@@ -32,7 +33,7 @@ it :
 	./bin/mapb
 
 val:	all
-	valgrind --leak-check=full --show-leak-kinds=yes ./bin/mapb
+	valgrind --leak-check=full ./bin/mapb
 
 clean :
 	rm -rf $(OBJ_DIR)
