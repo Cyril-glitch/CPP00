@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 22:09:47 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/27 01:31:44 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/27 23:11:42 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 //Constructor
 PhoneBook::PhoneBook(void)
 {
-    nb_contacts = 0;
-    contact[nb_contacts].firstname = "coucou";
+    _index = 0;
+    _nb_contacts = 0;
     return ;
 }
 
@@ -29,30 +29,30 @@ void PhoneBook::displaylogo(void)
     std::cout << "▖  ▖    ▄▖                ▄▖▌         ▄     ▌ \n"
               << "▛▖▞▌▌▌  ▌▌▌▌▌█▌▛▘▛▌▛▛▌█▌  ▙▌▛▌▛▌▛▌█▌  ▙▘▛▌▛▌▙▘\n"
               << "▌▝ ▌▙▌  ▛▌▚▚▘▙▖▄▌▙▌▌▌▌▙▖  ▌ ▌▌▙▌▌▌▙▖  ▙▘▙▌▙▌▛▖\n"
-              << "    ▄▌                                        \n\n"; 
+              << "    ▄▌                                        \n"; 
     std::cout << RESET;
 }
 
 
 /*
 GET_CMD
-On boucle a l'infini tant qu'une commande valide n'est pas saisie.
+Target : On boucle a l'infini tant qu'une commande valide n'est pas saisie.
 */
 
 
-//On affiches les commandes disponibles et on recupere l'entree utilisateur.
-void PhoneBook::displaycmds(void)
+//On affiches les commandes disponibles
+void PhoneBook::_displaycmds(void)
 {
-    std::cout << MINT "PLEASE ENTER ONES OF FOLLOWING COMMANDS :\n\n" RESET;
-    std::cout << SALMON "ADD" RESET << "\n";
-    std::cout << SALMON "SEARCH" RESET << "\n";
-    std::cout << SALMON "EXIT\n" RESET << "\n";
+    std::cout << MINT "\n\nPLEASE ENTER ONES OF FOLLOWING COMMANDS :\n\n" RESET;
+    std::cout << LAVENDER "ADD" RESET << "\n";
+    std::cout << LAVENDER "SEARCH" RESET << "\n";
+    std::cout << LAVENDER "EXIT\n" RESET << "\n";
 }
 
-//On verifie que la commande entree fait partie des commandes disponibles.
-int PhoneBook::checkcmd(void)
+//On verifie que la validite de la commande entree
+int PhoneBook::_checkcmd(void)
 {
-    return (cmd == "ADD" || cmd == "SEARCH" || cmd == "EXIT");
+    return (_cmd == "ADD" || _cmd == "SEARCH" || _cmd == "EXIT");
 }
 
 //Les eventuels erreurs concernant le flux d'entree sont geree par safegetline.
@@ -60,10 +60,10 @@ int PhoneBook::getcmd(void)
 {        
     while(true)
     {
-        displaycmds();
-        if (!safe_getline(cmd))
+        _displaycmds();
+        if (!safe_getline(_cmd))
             return 0;
-        if (checkcmd())
+        if (_checkcmd())
             return 1;
     }
 }
@@ -72,83 +72,100 @@ int PhoneBook::getcmd(void)
 
 /*
 EXECMD
-On boucle tant que la commande EXIT n'est pas saisie 
+target : On boucle tant que la commande EXIT n'est pas saisie 
 */
 
 
 int PhoneBook::execmd(void)
 {   
-        if(cmd == "ADD")
-            add();
-        if(cmd == "SEARCH") 
-            search();
-        if (cmd == "EXIT")
-            return exit(); 
+        if(_cmd == "ADD")
+            _add();
+        if(_cmd == "SEARCH") 
+            _search();
+        if (_cmd == "EXIT")
+            return _exit(); 
         return 1;
 }
 
 /*
 ADD
-On boucle tant que tout les champs du contact ne sont pas remplie
+Target: On boucle tant que tout les champs du contact ne sont pas remplie
 */
 
+//On met a jour l'index du contact a remplir
+void PhoneBook::_update_index(void)
+{
+    _index = _nb_contacts % 8;
+}
+
+void PhoneBook::_displayfield(std::string field)
+{
+    std::cout << L_GREEN << field << RESET;
+}
 
 //On recupere la saisie utilisateur dans la string "info" et on la verifie.
-int PhoneBook::getfield(std::string field)
+int PhoneBook::_getfield(std::string field)
 {            
         while(true)
         {
-            std::cout << SALMON << field  << RESET ;  
-            if (!safe_getline(info))
+            _displayfield(field);
+            if (!safe_getline(_info))
                 return 0;
-            if (checkfield())
+            if (_checkfield())
                 break;
         }
-        fillfield(field);
+        _fillfield(field);
         return 1;
 }
 
-void PhoneBook::fillfield(std::string field)
-{
-    if (field == "first name:")
-        contact[nb_contacts].setfirstname(info);
-    if (field == "last name:")
-        contact[nb_contacts].setlastname(info);
-    if (field == "nick name:")
-        contact[nb_contacts].setnickname(info); 
-    if (field == "phone number:")
-        contact[nb_contacts].setnumber(info);
-    if (field == "darkest secret:")
-        contact[nb_contacts].setnumber(info); 
-}
-
 //On verifie qu'elle n'est pas vide ou compose d'ispace3
-int PhoneBook::checkfield(void)
+int PhoneBook::_checkfield(void)
 {
-    return (info.empty() || strisspace(info));
-}
-
-
-//On reitere le procede sur toutes les informations demande a l'utilisateur
-int PhoneBook::add(void)
-{
-    std::cout << ICE_BLUE "***\nADD A NEW CONTACT\n***" RESET << std::endl;
-
-    if (!getfield("first name:")) return 0;
-    if (!getfield("last name:")) return 0;
-    if (!getfield("nickname:")) return 0;
-    if (!getfield("phone number:")) return 0;
-    if (!getfield("darkest secret:")) return 0;
+    if(_info.empty() || strisspace(_info))
+    {
+        std::cout << BL_RED "Contact can't have empty fields.\nPlease Retry." << std::endl; 
+        return 0;
+    }
     return 1;
 }
 
-void PhoneBook::search(void)
+//On rafraichis le champ conrespondant dans le nouveau contact
+void PhoneBook::_fillfield(std::string field)
 {
-    (void)contact;
+    if (field == "first name:")
+        _contact[_index].setfirstname(_info);
+    if (field == "last name:")
+        _contact[_index].setlastname(_info);
+    if (field == "nick name:")
+        _contact[_index].setnickname(_info); 
+    if (field == "phone number:")
+        _contact[_index].setnumber(_info);
+    if (field == "darkest secret:")
+        _contact[_index].setnumber(_info); 
+}
+
+//On reitere le procede sur toutes les informations demande a l'utilisateur
+int PhoneBook::_add(void)
+{
+    _update_index();
+    std::printf(ICE_BLUE "\n#ADD CONTACT [%d]\n\n" RESET, _index);
+    if (!_getfield("first name:")) return 0;
+    if (!_getfield("last name:")) return 0;
+    if (!_getfield("nickname:")) return 0;
+    if (!_getfield("phone number:")) return 0;
+    if (!_getfield("darkest secret:")) return 0;
+    std::cout << GOLD "\nNEW CONTACT : \"" << _contact[_index].firstname << "\" ADDED WITH SUCCESS !" RESET << std::endl;
+    _nb_contacts++;
+    return 1;
+}
+
+void PhoneBook::_search(void)
+{
+    (void)_contact;
     std::cout << ICE_BLUE "***SEARCHING FOR A CONTACT***" RESET << std::endl;
 }
 
-int PhoneBook::exit(void)
+int PhoneBook::_exit(void)
 {
     std::cout << MINT "GOOD BYE !" RESET << std::endl;
     return 0;
