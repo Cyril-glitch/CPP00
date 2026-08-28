@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:57:00 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/27 00:12:41 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 00:18:27 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MAPB_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <limits>
 # include <cstdio>
 

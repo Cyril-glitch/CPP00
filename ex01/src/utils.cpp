@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 23:51:28 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/27 23:09:05 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 02:21:24 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,4 @@ int strisspace(const std::string str)
     for(i = 0 ; i < str.size() && std::isspace(str.at(i)); i++);
     return (i == str.size());
 }
+

@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:39:28 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/26 00:45:10 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 02:24:58 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define Contact_HPP
 # include <iostream>
 # include <string>
+#include <sstream>
 
 class Contact
 {
@@ -40,6 +41,8 @@ class Contact
         std::string getnickname(void) const;
         std::string getnumber(void) const;
         std::string getsecret(void) const;
+
+        void display_all_fields(void);
 };
 
 #endif

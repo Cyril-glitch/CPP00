@@ -6,11 +6,11 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:46:01 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/26 00:52:36 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 02:32:44 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "../inc/mapb.hpp"
 #include "../inc/Contact.hpp"
 
 Contact::Contact(void)
@@ -66,6 +66,16 @@ std::string Contact::getnumber(void) const
 std::string Contact::getsecret(void) const
 {
     return darkestsecret; 
+}
+
+void    Contact::display_all_fields(void)
+{
+    std::cout << L_GREEN "first name:" RESET << getfirstname() << std::endl
+              << L_GREEN "last name:" RESET << getlastname() << std::endl 
+              << L_GREEN "nick name:" RESET << getnickname() << std::endl 
+              << L_GREEN "phone number:" RESET << getnumber() << std::endl 
+              << L_PURPLE "darkest secret:" RESET << getsecret() << std::endl
+              << std::endl;
 }
 
 Contact::~Contact(void)
