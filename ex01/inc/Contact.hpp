@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:39:28 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/28 02:24:58 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 21:33:58 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ class Contact
         std::string getnumber(void) const;
         std::string getsecret(void) const;
 
-        void display_all_fields(void);
+        void display_all_fields(int index);
 };
 
 #endif

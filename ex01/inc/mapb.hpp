@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:57:00 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/28 00:18:27 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 23:27:22 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 int safe_getline(std::string &refcmd);
 int strisspace(const std::string str);
+void displayprompt(void);
 
 
 

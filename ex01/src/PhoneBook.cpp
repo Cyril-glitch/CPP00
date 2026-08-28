@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 22:09:47 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/28 02:29:57 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 23:45:26 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,34 @@ PhoneBook::PhoneBook(void)
     return ;
 }
 
-void PhoneBook::displaylogo(void)
+void PhoneBook::_displaylogo(void)
 {
     std::cout << ICE_BLUE;
     std::cout << "▖  ▖    ▄▖                ▄▖▌         ▄     ▌ \n"
               << "▛▖▞▌▌▌  ▌▌▌▌▌█▌▛▘▛▌▛▛▌█▌  ▙▌▛▌▛▌▛▌█▌  ▙▘▛▌▛▌▙▘\n"
               << "▌▝ ▌▙▌  ▛▌▚▚▘▙▖▄▌▙▌▌▌▌▙▖  ▌ ▌▌▙▌▌▌▙▖  ▙▘▙▌▙▌▛▖\n"
-              << "    ▄▌                                        \n"; 
+              << "    ▄▌                                        \n\n"; 
     std::cout << RESET;
+}
+
+int PhoneBook::run(void)
+{
+    _displaylogo();
+    _displaycmds();
+    while (true)
+    {
+        if (_getcmd() == -1)
+            return -1;
+        if (_execmd() == -1)
+            return -1;
+        else if (_cmd == "EXIT")
+            return 0;
+    }
 }
 
 void PhoneBook::_displaycmds(void)
 {
-    std::cout << MINT "\n\nPLEASE ENTER ONES OF FOLLOWING COMMANDS :\n\n" RESET;
+    std::cout << MINT "Please enter ones of the followings commandes :\n\n" RESET;
     std::cout << LAVENDER "ADD" RESET << "\n";
     std::cout << LAVENDER "SEARCH" RESET << "\n";
     std::cout << LAVENDER "EXIT\n" RESET << "\n";
@@ -43,11 +58,11 @@ int PhoneBook::_checkcmd(void)
     return (_cmd == "ADD" || _cmd == "SEARCH" || _cmd == "EXIT");
 }
 
-int PhoneBook::getcmd(void)
+int PhoneBook::_getcmd(void)
 {        
     while(true)
-    {
-        _displaycmds();
+    { 
+        displayprompt();
         if (!safe_getline(_cmd))
             return 0;
         if (_checkcmd())
@@ -55,14 +70,14 @@ int PhoneBook::getcmd(void)
     }
 }
 
-int PhoneBook::execmd(void)
+int PhoneBook::_execmd(void)
 {   
         if(_cmd == "ADD")
-            _add();
+            if (_add() == -1) return -1;
         if(_cmd == "SEARCH") 
-            _search();
+            if (_search() == -1) return -1;
         if (_cmd == "EXIT")
-            return _exit(); 
+            _exit(); 
         return 1;
 }
 
@@ -94,7 +109,7 @@ int PhoneBook::_checkfield(void)
 {
     if(_info.empty() || strisspace(_info))
     {
-        std::cout << BL_RED "Contact can't have empty fields.\nPlease Retry." << std::endl; 
+        std::cout << BL_RED "Contact can't have empty fields. Please Retry." << std::endl; 
         return 0;
     }
     return 1;
@@ -117,13 +132,13 @@ void PhoneBook::_fillfield(std::string field)
 int PhoneBook::_add(void)
 {
     _update_index();
-    std::printf(ICE_BLUE "\n#ADD CONTACT [%d]\n\n" RESET, _index);
-    if (!_getfield("first name:")) return 0;
-    if (!_getfield("last name:")) return 0;
-    if (!_getfield("nick name:")) return 0;
-    if (!_getfield("phone number:")) return 0;
-    if (!_getfield("darkest secret:")) return 0;
-    std::cout << GOLD "\nNEW CONTACT : \"" << _contact[_index].firstname << "\" ADDED WITH SUCCESS !" RESET << std::endl;
+    std::cout << ICE_BLUE "\ncontact[" << _index << "]" RESET << std::endl;
+    if (!_getfield("first name:")) return -1;
+    if (!_getfield("last name:")) return -1;
+    if (!_getfield("nick name:")) return -1;
+    if (!_getfield("phone number:")) return -1;
+    if (!_getfield("darkest secret:")) return -1;
+    std::cout << GOLD "\nNew contact \"" << _contact[_index].firstname << "\" added with success !\n" RESET << std::endl;
     _nb_contacts++;
     return 1;
 }
@@ -132,7 +147,7 @@ int PhoneBook::_emptybook(void)
 {
     if (_nb_contacts == 0)
     {
-        std::cout << "YOU HAVEN'T SAVED CONTACT YET..." << std::endl;
+        std::cout << BL_RED "You haven't any contacts yet..." RESET << std::endl;
         return 1;
     }
     return 0;
@@ -157,7 +172,7 @@ void PhoneBook::displaycolumn()
 
 void PhoneBook::displaycontact()
 {
-    for(int i = 0; i < _nb_contacts; i++)
+    for(int i = 0; i < 8 && i < _nb_contacts; i++)
     {
         std::cout << std::right
               << std::setw(10)<< i << "|"
@@ -166,10 +181,12 @@ void PhoneBook::displaycontact()
               << std::setw(10)<< formatfield(_contact[i].getnickname()) << "|"
               << std::endl;
     }
+    std::cout << MINT "\nEnter the index of the contact you are looking for" << std::endl;
 }
 
 int PhoneBook::out_range(void)
 {
+    if (_target.empty()) return 1;
     if (_target.size() > 1) return 1;
     if (!_target.find_first_not_of("01234567")) return 1;
     if ((_target.at(0) - 48) > (_nb_contacts - 1)) return 1; 
@@ -179,11 +196,14 @@ int PhoneBook::out_range(void)
 int PhoneBook::checkindex(void)
 {
     if (out_range())
-    {
-        std::cout << BL_RED "\ninvalid index...please select index of an existing contact" RESET << std::endl;
-        return 0;
-    }
+        std::cout << BL_RED "Error: please select index of an existing contact" RESET << std::endl;
+        return 0; 
     return 1;
+}
+
+void PhoneBook::display_bad_index(void)
+{
+
 }
 
 int PhoneBook::gettarget(void)
@@ -192,6 +212,8 @@ int PhoneBook::gettarget(void)
     {
         displaycolumn();
         displaycontact();
+        displayprompt();
+        display_bad_index();
         if (!safe_getline(_target))
             return -1;
         if (checkindex())
@@ -200,21 +222,21 @@ int PhoneBook::gettarget(void)
     return _target.at(0) - 48;
 }
 
-void PhoneBook::_search(void)
+int PhoneBook::_search(void)
 { 
-    int index;
+    int targeti;
 
-    index = 0;
-    if (_emptybook()) return;
-    index = gettarget();
-    if (index == -1) return ;
-    _contact[index].display_all_fields(); 
+    targeti = 0;
+    if (_emptybook()) return 0;
+    targeti = gettarget();
+    if (targeti == -1) return -1;
+    _contact[targeti].display_all_fields(targeti); 
+    return 1;
 }
 
-int PhoneBook::_exit(void)
+void PhoneBook::_exit(void)
 {
-    std::cout << MINT "GOOD BYE !" RESET << std::endl;
-    return 0;
+    std::cout << MINT "Good bye !" RESET << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)

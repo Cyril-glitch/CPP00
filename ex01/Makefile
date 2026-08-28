@@ -33,7 +33,7 @@ it :
 	./bin/mapb
 
 val:	all
-	valgrind --leak-check=full ./bin/mapb
+	valgrind --leak-check=full --show-leak-kinds=all ./bin/mapb
 
 clean :
 	rm -rf $(OBJ_DIR)

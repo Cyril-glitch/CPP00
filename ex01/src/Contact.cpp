@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:46:01 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/28 02:32:44 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/28 21:26:52 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ std::string Contact::getsecret(void) const
     return darkestsecret; 
 }
 
-void    Contact::display_all_fields(void)
+void    Contact::display_all_fields(int index)
 {
-    std::cout << L_GREEN "first name:" RESET << getfirstname() << std::endl
+    std::cout << std::right << std::endl;
+    std::cout << ICE_BLUE "CONTACT[" << index << "]" RESET << std::endl 
+              << L_GREEN "first name:" RESET << getfirstname() << std::endl
               << L_GREEN "last name:" RESET << getlastname() << std::endl 
               << L_GREEN "nick name:" RESET << getnickname() << std::endl 
               << L_GREEN "phone number:" RESET << getnumber() << std::endl 
