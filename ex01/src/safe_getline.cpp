@@ -6,26 +6,41 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 00:29:54 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/26 23:46:07 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/29 02:01:52 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/mapb.hpp"
 
-int safe_getline(std::string &input)
+static int closedstream(void)
 {
-    std::getline(std::cin, input);
     if (std::cin.eof())
     {
         std::cout << BL_RED "input have been closed\n" RESET;
-        return 0;
+        return 1;
     }
-    else if(std::cin.fail())
+    return 0;
+}
+
+static int errinput(void)
+{
+    if(std::cin.fail())
     {
         std::cout << BL_RED "An error occurred while reading your input. Please try again.\n" RESET;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        safe_getline(input);
+        return 1;
     }
+    return 0;
+}
+
+int safe_getline(std::string &input)
+{
+    while(true)
+    {
+        std::getline(std::cin, input);
+        if (closedstream()) return -1; 
+        if (!errinput()) break;
+    } 
     return 1;
 }

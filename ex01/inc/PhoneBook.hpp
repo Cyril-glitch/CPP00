@@ -6,7 +6,7 @@
 /*   By: cycolonn <cycolonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 20:52:47 by cycolonn          #+#    #+#             */
-/*   Updated: 2026/08/28 23:45:04 by cycolonn         ###   ########.fr       */
+/*   Updated: 2026/08/29 01:54:43 by cycolonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ class PhoneBook
     PhoneBook(void);
     ~PhoneBook(void);
 
-
-    void _displaylogo(void);
     int run(void);
-    int _getcmd(void);
-    int _execmd(void);
     
-
     private :
 
     std::string _cmd;
@@ -36,8 +31,15 @@ class PhoneBook
     
 
     int _index;
+    int _badindex;
     int _nb_contacts;
     Contact _contact[8];
+
+
+    //run utils
+    void _displaylogo(void);
+    int _getcmd(void);
+    int _execmd(void);
 
     //execmd utils
     int _add();
@@ -48,14 +50,12 @@ class PhoneBook
     void _displaycmds(void);
     int _checkcmd();    
 
-
     //add utils
     void _displayfield(std::string field);
     int _getfield(std::string field);
     int _checkfield();    
     void _fillfield(std::string field);
     void _update_index(void);
-
 
     //search utils
     int _emptybook(void);
@@ -64,8 +64,7 @@ class PhoneBook
     std::string formatfield(std::string field);
     int gettarget(void);
     int out_range(void);
-
-    void displaybadindex(void);
+    void display_bad_index(void);
     int checkindex(void);
 };
 
